@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+    background:lightgreen;
+    text-align:center;
+    
+}
+</style>
+</head>
+<body>
+    <center>
+<h1>Child Table</h1>
+<?php
+
+
+// Create connection
+$connection=mysqli_connect("localhost","root","","msdigital");
+// Check connection
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
+
+$mysql ="SELECT id, financialTranid, moduleid ,amount, headid, crdr, brid, head_name FROM  financial_transdetail";
+
+$result = $connection->query($mysql);
+
+if ($result->num_rows > 0) {
+    echo "<table><tr>
+    <th>ID</th>
+    <th>financialTranid</th>
+    <th>moduleid</th>
+    <th>amount</th>
+    <th>headid</th>
+    <th>crdr</th>
+    <th>brid</th>
+    <th>head_name</th>
+    </tr>";
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "<tr>
+        <td>" . $row["id"]. " </td>
+         <td>" . $row["financialTranid"]. " </td>
+          <td>" . $row["moduleid"]. " </td>
+           <td>" . $row["amount"]. " </td>
+           <td>" . $row["headid"]. " </td>
+         <td>" . $row["crdr"]. " </td>
+          <td>" . $row["brid"]. " </td>
+           <td>" . $row["head_name"]. " </td>
+        </tr>";
+    }
+    echo "</table>";
+} else {
+    echo "0 results";
+}
+?>
+</center>
+</body>
+</html>
